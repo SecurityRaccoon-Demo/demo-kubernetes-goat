@@ -171,3 +171,17 @@ Thanks to to these wonderful people: 🎉
         <td align="center"><a href="https://github.com/ant4g0nist"><img alt="ant4g0nist"src="https://avatars.githubusercontent.com/u/3500559?v=4" width="100" /><br />ant4g0nist</a></td>
     </tr>
 </table>
+## Resetting to the vulnerable baseline
+
+This repo is intentionally vulnerable for Security Raccoon demos. Raccoon fix PRs get merged here, which removes vulnerabilities over time. The original vulnerable state is kept as the lightweight tag `vulnerable-baseline` (tagged 2026-10-16).
+
+To restore it without rewriting history (no force-push), add a commit that puts the tree back to the baseline:
+
+```sh
+git fetch --tags origin
+git checkout <default-branch> && git pull
+git rm -r -q . && git checkout vulnerable-baseline -- .
+git commit -m "Reset to vulnerable-baseline" && git push
+```
+
+Keep this section when resetting (re-add it if the baseline predates it). Close any open Raccoon PRs first.
